@@ -15,8 +15,17 @@ public class MainTest {
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+
         SqlSession sqlSession = sqlSessionFactory.openSession();
         Object o = sqlSession.selectOne("com.example.mapper.StudentMapper.findById", 1);
         System.out.println(o);
+        sqlSession.close();
+        SqlSession sqlSession2 = sqlSessionFactory.openSession();
+        Object o1 = sqlSession2.selectOne("com.example.mapper.StudentMapper.findById", 1);
+        System.out.println(o1);
+        sqlSession2.close();
+
+
     }
 }
